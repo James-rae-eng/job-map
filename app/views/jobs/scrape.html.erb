@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<div id="scraped">
+  <% @scrape.each do |job| %>
+    <p>
+      <%= job %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to 'Go Back', root_path %>

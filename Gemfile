@@ -40,6 +40,13 @@ gem "jbuilder"
 #gem 'dotenv-rails', groups: [:development, :test]
 gem "figaro"
 
+# web scraping tool
+#gem 'kimurai'
+#gem 'tanakai'
+gem 'pry'
+gem 'nokogiri'
+gem 'httparty'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  resources :maps
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  root "maps#show"
+  resources :jobs do 
+    collection do 
+      get :scrape
+    end
+  end
+
+  resources :maps
+
+  #root "maps#show"
+  root "jobs#index"
 end
