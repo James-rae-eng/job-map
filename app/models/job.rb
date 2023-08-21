@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
     require 'open-uri'
+    
     def self.scrape
         
         url = 'https://www.totaljobs.com/jobs/web-developer/in-exeter?radius=5'
@@ -10,13 +11,13 @@ class Job < ApplicationRecord
         job_listings = parsed_page.css("article.res-ihwgmh")
         job_listings.each do |job_listing|
            job = {
-                  title: job_listing.css('div.res-1v262t5'),
-                  location: job_listing.css('span.res-dettfq')[0],
-                  salary: job_listing.css('span.res-hbjkz4')[0],
+                  title: job_listing.css('div.res-1v262t5')[0].text.strip,
+                  location: job_listing.css('span.res-dettfq')[0].text.strip,
+                  salary: job_listing.css('div.res-hbjkz4')[0].text.strip,
                   link: "https://www.totaljobs.com" + job_listing.css('a')[1].attributes['href'].value
             }
             jobs << job
         end
-        return jobs[0] # Return the array here
+        return jobs # Return the array here
     end
 end

@@ -6,6 +6,14 @@ class JobsController < ApplicationController
     puts searchInput #search input is not used for now, ready to be incorporated into url when ready
     #url = 'https://www.totaljobs.com/jobs/web-developer/in-exeter?radius=5'
     @scrape = Job.scrape
+    #@scrape.each do |item|
+    #  item.each do |key, value|
+    #    puts value
+    #  end
+    #end
+
+    # Send @scrape to a marker factory to extract the location from the hash and create a marker, then send to map
+
   end
 
   # GET /jobs or /jobs.json
