@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 <p id="alert"><%= alert %></p>
 
+<%= include_gon %>
+
+<%= render "search" %>
+
 <div id="scraped">
   <% @scrape.each do |job| %>
     <p>
@@ -9,4 +13,9 @@
   <% end %>
 </div>
 
-<%= link_to 'Go Back', root_path %>
+<% provide :head_tags do %>
+  <%= javascript_import_module_tag "map" %>
+<% end %>
+<div id="map" data: {@scrape.to_json}></div>
+
+<%= link_to 'Home', root_path %>

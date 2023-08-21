@@ -47,6 +47,12 @@ gem 'pry'
 gem 'nokogiri'
 gem 'httparty'
 
+# Geocoding to convert address to latitude & longitude
+gem 'geocoder'
+
+# to allow passing of ruvy variables to js
+gem 'gon'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 

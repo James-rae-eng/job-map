@@ -2,23 +2,8 @@
 
 <h1>Jobs</h1>
 
-<%#= button_to "Scrape", scrape_jobs_path %>
+<%= render "search" %>
 
-<%= form_tag scrape_jobs_path, method: :get do %>
-  <label for="scrape">Scrape</label>
-  <%= text_field_tag :scrape %>
- <%= submit_tag "Submit" %>
-<% end %>
 
-<div id="jobs">
-  <% @jobs.each do |job| %>
-    <%= render job %>
-    <p>
-      <%= link_to "Show this job", job %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New job", new_job_path %>
 
 

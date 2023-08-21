@@ -1,0 +1,6 @@
+
+<%= form_tag scrape_jobs_path, method: :get do %>
+  <label for="scrape">Search (scrape)</label>
+  <%= text_field_tag :scrape %>
+ <%= submit_tag "Submit" %>
+<% end %>

@@ -4,10 +4,8 @@ Rails.application.routes.draw do
     collection do 
       get :scrape
     end
+    resources :maps
   end
 
-  resources :maps
-
-  #root "maps#show"
   root "jobs#index"
 end
