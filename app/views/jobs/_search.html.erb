@@ -1,6 +1,13 @@
 
 <%= form_tag scrape_jobs_path, method: :get do %>
-  <label for="scrape">Search (scrape)</label>
-  <%= text_field_tag :scrape %>
+  <label for="job">Search: Job</label>
+  <%= text_field_tag :job %>
+
+  <label for="location">Location</label>
+  <%= text_field_tag :location %>
+
+  <label for="radius">Radius</label>
+  <%= text_field_tag :radius %>
+
  <%= submit_tag "Submit" %>
 <% end %>

@@ -2,14 +2,13 @@ class JobsController < ApplicationController
   before_action :set_job, only: %i[ show edit update destroy ]
 
   def scrape 
-    searchInput = params[:scrape]
-    puts searchInput #search input is not used for now, ready to be incorporated into url when ready
-    #url = 'https://www.totaljobs.com/jobs/web-developer/in-exeter?radius=5'
-    @scrape = Job.scrape
+    job = params[:job]
+    location = params[:location]
+    radius = params[:radius]
+    @scrape = Job.scrape(job, location, radius)
 
     # create gon variable of the jobs that can be accessed by js 
     gon.scrape = @scrape
-
   end
 
   # GET /jobs or /jobs.json

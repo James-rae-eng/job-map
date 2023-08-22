@@ -10,10 +10,15 @@ class Job < ApplicationRecord
             return "na"
         end
     end
+
+    def self.formURL(job, location, radius)
+        cleanJob = job.gsub(" ", "-")
+        url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+location+'?radius='+radius
+    end
     
-    def self.scrape
-        
-        url = 'https://www.totaljobs.com/jobs/web-developer/in-exeter?radius=5'
+    def self.scrape(job, location, radius)
+        # url = 'https://www.totaljobs.com/jobs/web-developer/in-exeter?radius=5'
+        url = formURL(job, location, radius)
         parsed_page = Nokogiri::HTML(URI.open(url, 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'))
         # container to hold jobs:
         jobs = Array.new
