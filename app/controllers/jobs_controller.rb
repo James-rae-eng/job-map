@@ -6,7 +6,9 @@ class JobsController < ApplicationController
     location = params[:location]
     radius = params[:radius]
     @scrape = Job.scrape(job, location, radius)
-
+    if @scrape.length === 0 
+      redirect_to root_path, alert: "No Jobs found, please try another search." 
+    end
     # create gon variable of the jobs that can be accessed by js 
     gon.scrape = @scrape
   end

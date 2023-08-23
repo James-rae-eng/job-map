@@ -2,23 +2,19 @@ class Job < ApplicationRecord
     require 'open-uri'
     require 'geocoder'
 
-    def self.convertAddress(address)
+    def self.convertAddress(address, location)
         result = Geocoder.search(address)
         if result.first.present?
             return result.first.coordinates
         else 
-            return "na"
+            return baseLocation = Geocoder.search(location)
         end
-    end
-
-    def self.formURL(job, location, radius)
-        cleanJob = job.gsub(" ", "-")
-        url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+location+'?radius='+radius
     end
     
     def self.scrape(job, location, radius)
-        # url = 'https://www.totaljobs.com/jobs/web-developer/in-exeter?radius=5'
-        url = formURL(job, location, radius)
+        cleanJob = job.gsub(" ", "-")
+        cleanlocation = location.gsub(" ", "-")
+        url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+location+'?radius='+radius
         parsed_page = Nokogiri::HTML(URI.open(url, 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'))
         # container to hold jobs:
         jobs = Array.new
@@ -31,7 +27,7 @@ class Job < ApplicationRecord
                   location: job_item.css('span.res-dettfq')[0].text.strip,
                   salary: job_item.css('div.res-hbjkz4')[0].text.strip,
                   link: "https://www.totaljobs.com" + job_item.css('a')[1].attributes['href'].value,
-                  latlong: convertAddress(job_item.css('span.res-dettfq')[0].text.strip)
+                  latlong: convertAddress(job_item.css('span.res-dettfq')[0].text.strip, location)
             }
             jobs << job
         end
