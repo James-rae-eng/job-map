@@ -10,12 +10,8 @@ class Job < ApplicationRecord
             return baseLocation = Geocoder.search(location)
         end
     end
-    
-    def self.scrape(job, location, radius)
-        cleanJob = job.gsub(" ", "-")
-        cleanlocation = location.gsub(" ", "-")
-        url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+location+'?radius='+radius
-        parsed_page = Nokogiri::HTML(URI.open(url, 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'))
+
+    def self.jobList(parsed_page, location)
         # container to hold jobs:
         jobs = Array.new
         # Below is all of the job items that appear within the specified range
@@ -31,6 +27,28 @@ class Job < ApplicationRecord
             }
             jobs << job
         end
-        return jobs # Return the array here
+        jobs # Return the array here
+    end
+    
+    def self.scrape(job, location, radius)
+        cleanJob = job.gsub(" ", "-")
+        cleanlocation = location.gsub(" ", "-")
+        url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+location+'?radius='+radius
+        parsed_page = Nokogiri::HTML(URI.open(url, 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'))
+        
+        result = jobList(parsed_page, location)
+    end
+
+    def self.advancedScrape(job, location, radius, remote = 0)
+        cleanJob = job.gsub(" ", "-")
+        cleanlocation = location.gsub(" ", "-")
+        if remote = 0
+            url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+location+'?radius='+radius
+        else
+            url = 'https://www.totaljobs.com/jobs/work-from-home/'+cleanJob+'/in-'+location+'?radius='+radius
+        end
+        parsed_page = Nokogiri::HTML(URI.open(url, 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'))
+        
+        result = jobList(parsed_page, location)
     end
 end

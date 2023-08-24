@@ -5,8 +5,16 @@ class JobsController < ApplicationController
     job = params[:job]
     location = params[:location]
     radius = params[:radius]
-    @scrape = Job.scrape(job, location, radius)
-    if @scrape.length === 0 
+    advanced = params[:advanced]
+    # Handle simple & advanced search differently
+    if advanced == "1"
+      remote = params[:remote]
+      @scrape = Job.advancedScrape(job, location, radius, remote)
+    else 
+      @scrape = Job.scrape(job, location, radius)
+    end
+    # Dont generate map or go to another page if no job results were scraped
+    if @scrape.length == 0 
       redirect_to root_path, alert: "No Jobs found, please try another search." 
     end
     # create gon variable of the jobs that can be accessed by js 

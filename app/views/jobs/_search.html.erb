@@ -9,5 +9,14 @@
   <label for="radius">Radius</label>
   <%= select_tag :radius, options_for_select([5, 10, 20, 30]) %>
 
+  <label for="advanced">Advanced search</label>
+  <%= check_box_tag :advanced %>
+
+  <div id="extra_search" style="display:none;">
+    <label for="remote">Work from home only</label>
+    <%= check_box_tag :remote %>
+  </div>
+
  <%= submit_tag "Search" %>
 <% end %>
+
