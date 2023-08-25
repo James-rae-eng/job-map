@@ -11,7 +11,25 @@ class Job < ApplicationRecord
         end
     end
 
-    def self.jobList(parsed_page, location)
+    def self.underMaxSalary(salaryMax, jobSalary)
+        result = false
+        if salaryMax != "none"
+            cleanSalaryMax = salaryMax.tr('^0-9', '').to_i
+            if jobSalary.include? "-"
+                newJobSalary = jobSalary.gsub(/.*-/, '').tr('^0-9', '').to_i
+                if newJobSalary <= cleanSalaryMax
+                    result = true
+                end
+            else
+                result = true
+            end
+        else
+            result = true 
+        end
+        result
+    end
+
+    def self.jobList(parsed_page, location, salaryMax = "none")
         # container to hold jobs:
         jobs = Array.new
         # Below is all of the job items that appear within the specified range
@@ -25,7 +43,10 @@ class Job < ApplicationRecord
                   link: "https://www.totaljobs.com" + job_item.css('a')[1].attributes['href'].value,
                   latlong: convertAddress(job_item.css('span.res-dettfq')[0].text.strip, location)
             }
-            jobs << job
+            # Check if job salary is above max salary input, dont add to jobs array if it is
+            if underMaxSalary(salaryMax, job[:salary]) == true 
+                jobs << job
+            end
         end
         jobs # Return the array here
     end
@@ -39,16 +60,30 @@ class Job < ApplicationRecord
         result = jobList(parsed_page, location)
     end
 
-    def self.advancedScrape(job, location, radius, remote = 0)
+    def self.getURL(cleanJob, location, radius, remote, salaryMin)
+        url = 'https://www.totaljobs.com/jobs/'
+        # Deal with remote option
+        if remote == "1"
+            url << 'work-from-home/'
+        end
+        url << cleanJob+'/in-'+location+'?'
+        # Deal with minimum salary option
+        if salaryMin != "none"
+            cleanSalaryMin = salaryMin.tr('^0-9', '')
+            url << 'salary='+cleanSalaryMin+'&salarytypeid=1&radius='+radius+'&action=facet_selected%3bsalary%3b'+cleanSalaryMin+'%3bsalarytypeid%3b1'
+        else
+            url << 'radius='+radius
+        end    
+        # Return completed url
+        url
+    end
+
+    def self.advancedScrape(job, location, radius, remote = 0, salaryMin, salaryMax)
         cleanJob = job.gsub(" ", "-")
         cleanlocation = location.gsub(" ", "-")
-        if remote = 0
-            url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+location+'?radius='+radius
-        else
-            url = 'https://www.totaljobs.com/jobs/work-from-home/'+cleanJob+'/in-'+location+'?radius='+radius
-        end
+        url = getURL(cleanJob, location, radius, remote, salaryMin)
         parsed_page = Nokogiri::HTML(URI.open(url, 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'))
         
-        result = jobList(parsed_page, location)
+        result = jobList(parsed_page, location, salaryMax)
     end
 end

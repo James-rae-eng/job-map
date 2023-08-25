@@ -9,7 +9,9 @@ class JobsController < ApplicationController
     # Handle simple & advanced search differently
     if advanced == "1"
       remote = params[:remote]
-      @scrape = Job.advancedScrape(job, location, radius, remote)
+      salaryMin = params[:salaryMin]
+      salaryMax = params[:salaryMax]
+      @scrape = Job.advancedScrape(job, location, radius, remote, salaryMin, salaryMax)
     else 
       @scrape = Job.scrape(job, location, radius)
     end

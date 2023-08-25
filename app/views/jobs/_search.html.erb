@@ -15,6 +15,11 @@
   <div id="extra_search" style="display:none;">
     <label for="remote">Work from home only</label>
     <%= check_box_tag :remote %>
+
+    <label for="salaryMin">Salary min</label>
+    <%= select_tag :salaryMin, options_for_select(["none", "£10,000", "£20,000", "£30,000", "£40,000", "£50,000", "£60,000", "£70,000", "£80,000", "£90,000", "£100,000"]) %>
+    <label for="salaryMax">Salary max (optional)</label>
+    <%= select_tag :salaryMax, options_for_select(["none", "£20,000", "£30,000", "£40,000", "£50,000", "£60,000", "£70,000", "£80,000", "£90,000", "£110,000"]) %>
   </div>
 
  <%= submit_tag "Search" %>
