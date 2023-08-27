@@ -12,10 +12,19 @@ function initMap() {
   // Create infowindow to be filled with content as a marker is clicked
   const infowindow = new google.maps.InfoWindow();
 
+  // Array to track latlongs to make sure there are no duplicate locations
+  const allCoords = [];
+
   // Add markers for each job
   for (let i = 0; i < jobs.length; i += 1) {
     // Add markers to the jobs
-    const coords = new google.maps.LatLng(jobs[i].latlong[0], jobs[i].latlong[1]);
+    const testCoords = [jobs[i].latlong[0], jobs[i].latlong[1]];
+    // if marker location same as a previous job, move its longitude (no overlapping markers)
+    if (allCoords.some((item) => item.includes(testCoords[1]))) {
+      testCoords[1] = jobs[i].latlong[1] + 0.005;
+    }
+    allCoords.push(testCoords);
+    const coords = new google.maps.LatLng(testCoords[0], testCoords[1]);
     const marker = new google.maps.Marker({ position: coords, map });
 
     // Deal with infowindow content & event listener for each marker
