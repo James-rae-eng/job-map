@@ -11,6 +11,7 @@ class JobsController < ApplicationController
       remote = params[:remote]
       salaryMin = params[:salaryMin]
       salaryMax = params[:salaryMax]
+      #secondJob = params[:secondJob]
       @scrape = Job.advancedScrape(job, location, radius, remote, salaryMin, salaryMax)
     else 
       @scrape = Job.scrape(job, location, radius)
