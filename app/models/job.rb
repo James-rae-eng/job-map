@@ -4,7 +4,9 @@ class Job < ApplicationRecord
 
     def self.convertAddress(address, location)
         result = Geocoder.search(address)
+        # Set location originally searched for as deafult if geocode cant find location
         baseLocation = Geocoder.search(location)
+        # Check a result has been found & it's in the uk
         if result.first.present? && result.first.country_code === "gb"
             return result.first.coordinates
           
@@ -15,9 +17,13 @@ class Job < ApplicationRecord
 
     def self.underMaxSalary(salaryMax, jobSalary)
         result = false
+        # Check if salary max is even required & return tru if not
         if salaryMax != "none"
+            # Strip desired salary max entered by user of letters & convert to workable number
             cleanSalaryMax = salaryMax.tr('^0-9', '').to_i
+            # Check if job included a salary range in the description with a hyphen
             if jobSalary.include? "-"
+                # Strip job salary description of all but numbers and remove any prior to hyphen
                 newJobSalary = jobSalary.gsub(/.*-/, '').tr('^0-9', '').to_i
                 if newJobSalary <= cleanSalaryMax
                     result = true
@@ -71,6 +77,7 @@ class Job < ApplicationRecord
     end
     
     def self.scrape(job, location, radius)
+        # Get job & location in format ready for url (no spaces between words)
         cleanJob = job.gsub(" ", "-")
         cleanLocation = location.gsub(" ", "-")
         url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+cleanLocation+'?radius='+radius
@@ -96,6 +103,7 @@ class Job < ApplicationRecord
     end
 
     def self.advancedScrape(job, location, radius, remote = 0, salaryMin, salaryMax)
+        # Get job & location in format ready for url (no spaces between words)
         cleanJob = job.gsub(" ", "-")
         cleanLocation = location.gsub(" ", "-")
         url = getURL(cleanJob, cleanLocation, radius, remote, salaryMin)
