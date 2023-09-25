@@ -1,5 +1,9 @@
 class JobsController < ApplicationController
   before_action :set_job, only: %i[ show edit update destroy ]
+  # Disable CRF
+  protect_from_forgery with: :null_session
+
+  @scrapedJobs = nil
 
   def scrape 
     job = params[:job]
@@ -22,6 +26,8 @@ class JobsController < ApplicationController
     end
     # create gon variable of the jobs that can be accessed by js 
     gon.scrape = @scrape
+
+    @scrapedJobs = @scrape
   end
 
   # GET /jobs or /jobs.json
@@ -35,16 +41,31 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.new
+    #@job = Job.new(title, location, salary, link, lattitude, longitude)
+    ## redirect_to request.path
   end
 
   # GET /jobs/1/edit
   def edit
   end
 
+  # Add job to saved list (triggered by js)
+  def addJob
+    index = request.path.tr('^0-9', '').to_i
+    job = @scrapedJobs[index]
+    # @scrapedjobs is coming up nil, look up how to make universally available variable
+    title = job.title
+    location = job.location
+    salary = job.salary
+    link = job.link
+    latitude = job.latlong[0]
+    longitude = job.latlong[1]
+    create(title, location, salary, link, latitude, longitude)
+  end
+
   # POST /jobs or /jobs.json
-  def create
-    @job = Job.new(job_params)
+  def create (title, location, salary, link, latitude, longitude)
+    @job = Job.new(title, location, salary, link, latitude, longitude)
 
     respond_to do |format|
       if @job.save

@@ -55,15 +55,15 @@ class Job < ApplicationRecord
         driver.manage.timeouts.implicit_wait = 5
 
         job_listings = driver.find_element(xpath: '//div[@data-genesis-element="CARD_GROUP_CONTAINER"]')
-        job_box = job_listings.find_elements(class: 'res-ihwgmh')
+        job_box = job_listings.find_elements(tag_name: 'article')
         job_box.each do |job_item|
            job = {
-                  title: job_item.find_element(class: 'res-1v262t5').text,
-                  location: job_item.find_element(css: '.res-dettfq .res-1wac8dr').text,
+                  title: job_item.find_element(xpath: './/a[@data-at="job-item-title"]').text,
+                  location: job_item.find_element(xpath: './/span[@data-at="job-item-location"]').text,
                   #Fix the salary below, just taking the first jobs one, same class as location
-                  salary: job_item.find_element(css: '.res-hbjkz4 .res-1wac8dr').text,
-                  link: job_item.find_element(class: 'res-r3jqsu').attribute('href'),
-                  latlong: convertAddress(job_item.find_element(css: '.res-dettfq .res-1wac8dr').text, location)
+                  salary: job_item.find_element(xpath: './/span[@data-at="job-item-salary-info"]').text,
+                  link: job_item.find_element(xpath: './/a[@data-at="job-item-title"]').attribute('href'),
+                  latlong: convertAddress(job_item.find_element(xpath: './/span[@data-at="job-item-location"]').text, location)
             }
             # Check if job salary is above max salary input, dont add to jobs array if it is
             if underMaxSalary(salaryMax, job[:salary]) == true 

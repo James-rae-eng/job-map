@@ -1,4 +1,17 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-undef */
+
+// import { jobs_path } from './routes';
+// import { addJob_jobs_path } from './routes';
+
+function sendIndex(index) {
+  const httpRequest = new XMLHttpRequest();
+  // httpRequest.open('POST', `${jobs_path}/${index}`);
+  // httpRequest.open('POST', addJob_jobs_path(index));
+  httpRequest.open('POST', `http://localhost:3000/jobs/${index}/addJob`);
+  httpRequest.send();
+}
+
 function initMap() {
   // Get scrape variable containing all jobs
   const jobs = gon.scrape;
@@ -33,11 +46,22 @@ function initMap() {
         `<p>${jobs[i].title}</p>`
       + `<p>${jobs[i].location}</p>`
       + `<p>${jobs[i].salary}</p>`
-      + `<a href=${jobs[i].link} target="_blank">${jobs[i].link}</a>`,
+      + `<a href=${jobs[i].link} target="_blank">${jobs[i].link}</a>`
+      + '<br><br>'
+      // eslint-disable-next-line no-template-curly-in-string
+      + `<button id="saveBtn" value=${i}>Save</button>`,
       );
       infowindow.open(map, marker);
     });
   }
+
+  google.maps.event.addListener(infowindow, 'domready', () => {
+    google.maps.event.addDomListener(document.getElementById('saveBtn'), 'click', () => {
+      const btn = document.getElementById('saveBtn');
+      const index = btn.value;
+      sendIndex(index);
+    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

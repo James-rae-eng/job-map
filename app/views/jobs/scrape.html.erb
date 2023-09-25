@@ -3,11 +3,7 @@
 
 <%= include_gon %>
 
-<%= render "search" %>
-
 <% provide :head_tags do %>
   <%= javascript_import_module_tag "map" %>
 <% end %>
 <div id="map" data: {@scrape.to_json}></div>
-
-<%= link_to 'Home', root_path %>

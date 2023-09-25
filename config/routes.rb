@@ -4,8 +4,11 @@ Rails.application.routes.draw do
     collection do 
       get :scrape
     end
-    resources :maps
+    member do 
+    #collection do
+      post :addJob
+    end
   end
 
-  root "jobs#index"
+  root "jobs#home"
 end

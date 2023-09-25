@@ -48,6 +48,9 @@ gem 'nokogiri'
 gem 'httparty'
 gem 'selenium-webdriver'
 
+# Allow rails routes to be used in js files
+gem 'js-routes'
+
 # Geocoding to convert address to latitude & longitude
 gem 'geocoder'
 
@@ -86,6 +89,6 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  #gem "selenium-webdriver"
   gem "webdrivers"
 end
