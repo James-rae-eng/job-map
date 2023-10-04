@@ -2,6 +2,8 @@ class Job < ApplicationRecord
     require 'geocoder'
     require 'selenium-webdriver'
 
+    $scrapedJobs = nil
+
     def self.convertAddress(address, location)
         result = Geocoder.search(address)
         # Set location originally searched for as deafult if geocode cant find location
@@ -42,18 +44,29 @@ class Job < ApplicationRecord
         jobs = Array.new
  
         # configuring Chrome to run in headless mode 
-        options = Selenium::WebDriver::Chrome::Options.new 
-        options.add_argument("--headless") 
+        options = Selenium::WebDriver::Chrome::Options.new
+
+        windows_useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+        # linux_useragent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.add_argument("--no-sandbox")
+        options.add_argument("user-agent=#{windows_useragent}")
+        options.add_argument("--disable-web-security")
+        options.add_argument("--disable-xss-auditor")
+        options.add_option("excludeSwitches", ["enable-automation", "load-extension"])
+        options.add_argument("--headless")
         
         # initializing the Selenium Web Driver for Chrome 
         driver = Selenium::WebDriver.for :chrome, options: options 
+
+        # driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         
         # visiting a web page in the browser opened by Selenium behind the scene 
         driver.get(url)
 
         # Manage time to load 
-        driver.manage.timeouts.implicit_wait = 5
-
+        driver.manage.timeouts.implicit_wait = 10
+ 
         job_listings = driver.find_element(xpath: '//div[@data-genesis-element="CARD_GROUP_CONTAINER"]')
         job_box = job_listings.find_elements(tag_name: 'article')
         job_box.each do |job_item|
@@ -82,6 +95,8 @@ class Job < ApplicationRecord
         cleanLocation = location.gsub(" ", "-")
         url = 'https://www.totaljobs.com/jobs/'+cleanJob+'/in-'+cleanLocation+'?radius='+radius
         result = jobList(url, location)
+        $scrapedJobs = result
+        return result
     end
 
     def self.getURL(cleanJob, location, radius, remote, salaryMin)
@@ -108,5 +123,7 @@ class Job < ApplicationRecord
         cleanLocation = location.gsub(" ", "-")
         url = getURL(cleanJob, cleanLocation, radius, remote, salaryMin)
         result = jobList(url, location, salaryMax)
+        $scrapedJobs = result
+        return result
     end
 end

@@ -3,8 +3,6 @@ class JobsController < ApplicationController
   # Disable CRF
   protect_from_forgery with: :null_session
 
-  @scrapedJobs = nil
-
   def scrape 
     job = params[:job]
     location = params[:location]
@@ -26,8 +24,6 @@ class JobsController < ApplicationController
     end
     # create gon variable of the jobs that can be accessed by js 
     gon.scrape = @scrape
-
-    @scrapedJobs = @scrape
   end
 
   # GET /jobs or /jobs.json
@@ -52,8 +48,11 @@ class JobsController < ApplicationController
   # Add job to saved list (triggered by js)
   def addJob
     index = request.path.tr('^0-9', '').to_i
-    job = @scrapedJobs[index]
+    job = $scrapedJobs[index]
+    puts job
+
     # @scrapedjobs is coming up nil, look up how to make universally available variable
+
     title = job.title
     location = job.location
     salary = job.salary
