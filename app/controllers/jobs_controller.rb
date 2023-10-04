@@ -47,24 +47,25 @@ class JobsController < ApplicationController
 
   # Add job to saved list (triggered by js)
   def addJob
+    # From the post request url get the index number of the job
     index = request.path.tr('^0-9', '').to_i
+    # Get the job from the scraped jobs global variable
     job = $scrapedJobs[index]
-    puts job
 
-    # @scrapedjobs is coming up nil, look up how to make universally available variable
+    title = job[:title]
+    location = job[:location]
+    salary = job[:salary]
+    link = job[:link]
+    latlong = job[:latlong]
+    latitude = latlong[0]
+    longitude = latlong[1]
 
-    title = job.title
-    location = job.location
-    salary = job.salary
-    link = job.link
-    latitude = job.latlong[0]
-    longitude = job.latlong[1]
     create(title, location, salary, link, latitude, longitude)
   end
 
   # POST /jobs or /jobs.json
   def create (title, location, salary, link, latitude, longitude)
-    @job = Job.new(title, location, salary, link, latitude, longitude)
+    @job = Job.new(title: title, location: location, salary: salary, link: link, latitude: latitude, longitude: longitude)
 
     respond_to do |format|
       if @job.save
