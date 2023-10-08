@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal">
+      <div id="jobs">
+          <% @jobs.each do |job| %>
+              <%= render job %>
+          <% end %>
+      </div>
+      <%= link_to "Go to map view", jobs_path, class: "map-view-button" %>
+      <%= link_to "Cancel", "#", data: {
+        controller: "modals",
+        action: "modals#close"
+      }, class: "cancel-button" %>
+  </div>
+<% end %>

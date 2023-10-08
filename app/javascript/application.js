@@ -1,7 +1,26 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-// import "@hotwired/turbo-rails"
-// import "controllers"
+import '@hotwired/turbo-rails';
+import 'controllers';
+
+import { Turbo } from '@hotwired/turbo-rails';
+
+//= require turbolinks
+//= require bootstrap
+//= require_tree.
+
 //= require js-routes
+
+// Remove content missing turbo frame
+document.addEventListener('turbo:before-stream-render', (event) => {
+  const fallbackToDefaultActions = event.detail.render;
+  event.detail.render = function (streamElement) {
+    if (streamElement.action == 'redirect') {
+      Turbo.visit(streamElement.target);
+    } else {
+      fallbackToDefaultActions(streamElement);
+    }
+  };
+});
 
 // Enable or disable advanced search
 const checkbox = document.getElementById('advanced');

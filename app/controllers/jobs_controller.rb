@@ -31,6 +31,11 @@ class JobsController < ApplicationController
     @jobs = Job.all
   end
 
+  # Small index in modal
+  def miniIndex
+    @jobs = Job.all
+  end
+
   # GET /jobs/1 or /jobs/1.json
   def show
   end

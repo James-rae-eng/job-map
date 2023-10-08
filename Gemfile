@@ -57,6 +57,12 @@ gem 'geocoder'
 # to allow passing of ruvy variables to js
 gem 'gon'
 
+# Used for Styling and modals
+gem 'bootstrap'
+gem 'popper_js'
+gem 'jquery-rails'
+gem 'turbolinks'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
