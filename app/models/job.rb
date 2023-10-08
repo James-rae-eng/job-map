@@ -10,8 +10,7 @@ class Job < ApplicationRecord
         baseLocation = Geocoder.search(location)
         # Check a result has been found & it's in the uk
         if result.first.present? && result.first.country_code === "gb"
-            return result.first.coordinates
-          
+            return result.first.coordinates          
         else 
             return baseLocation.first.coordinates
         end

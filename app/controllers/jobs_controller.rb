@@ -29,6 +29,17 @@ class JobsController < ApplicationController
   # GET /jobs or /jobs.json
   def index
     @jobs = Job.all
+
+    # Convert saved jobs into same format as scrape
+    result = []
+    list = @jobs.as_json
+    list.each do |job|
+      coords = [job["latitude"].to_f, job["longitude"].to_f]
+      job.merge!({"latlong" => coords})
+      result << job.except("id", "latitude", "longitude", "created_at", "updated_at")
+    end
+    # Set gon variable to result
+    gon.scrape = result
   end
 
   # Small index in modal
