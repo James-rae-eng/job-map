@@ -16,8 +16,12 @@
 
   <body>
     <%= render "shared/topbar" %>
-    <%= render "shared/search" %>
-    <%= yield %>
-    <%= turbo_frame_tag "modal" %>
+  
+    <div id="main">
+      <%= render "shared/search" %>
+      <%= turbo_frame_tag "modal" %>
+      <%= yield %>
+    </div>
+    <%= render "shared/footer" %>
   </body>
 </html>

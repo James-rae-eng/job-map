@@ -14,6 +14,77 @@
  *= require_self
  */
 
+ body {
+   margin: 0;
+   min-height: 100vh;
+   display: flex; 
+   flex-direction: column;
+ }
+
+ #main {
+   flex: 1; 
+ }
+
+ a:link { text-decoration: none; }
+ a:visited { text-decoration: none; }
+ a:hover { 
+   text-decoration: none; 
+   transform: scale(1.1);
+}
+ a:active { text-decoration: none; }
+
+ .topbar {
+   padding: 10px 10px;
+   margin-bottom: 10px;
+   display: flex;
+   justify-content: space-between;
+ }
+
+ #home {
+   font-size: x-large;
+   font-weight: bolder;
+ }
+
+ .home {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .about {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+ }
+
+ .search_form {
+   background-color: #e7e7e7;
+   padding: 10px 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 30px;
+ }
+
+ #simple_search {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+ }
+
+ #extra_search {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+ }
+
+ #search_button {
+   font-size: large;
+ }
+
  #map {
     width: 800px;
     height: 600px;
@@ -23,12 +94,14 @@
  .modal {
    position: fixed;
    z-index: 1;
-   padding: 2em;
+   padding: 1em;
+   min-width: 450px;
+   max-width: 600px;
    
-   /* Centering */
-   left: 50%;
-   top: 50%;
-   transform: translate(-50%, -50%);
+   /* Positioning */
+   right: 10px;
+   top: 40%;
+   transform: translate(-2%, -50%);
 
    overflow: auto;
    background-color: rgba(0, 0, 0, 0.322);
@@ -64,4 +137,28 @@
    cursor: pointer;
    float: left;
    text-decoration: none;
+} 
+
+ #footer { 
+   min-height:50px; 
+   background:rgb(241, 241, 241); 
+   display: flex;
+   flex-direction: column;
+ }
+
+ .personal {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+ }
+
+ .icon {
+	width: 30px;
+	transition: transform .3s;
+}
+
+.icon:hover {
+	transform: scale(1.2);
 }

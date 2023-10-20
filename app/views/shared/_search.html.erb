@@ -1,30 +1,45 @@
 
 <%= form_tag scrape_jobs_path, method: :get do %>
-  <label for="job">Search: Job</label>
-  <%= text_field_tag :job %>
+  <div class="search_form">
+    <div class="search_fields">
+      <div id="simple_search">
+        <div>
+          <label for="job">Job</label>
+          <%= text_field_tag :job %>
+        </div>
+        <div>
+          <label for="location">Location</label>
+          <%= text_field_tag :location %>
+        </div>
+        <div>
+          <label for="radius">Radius</label>
+          <%= select_tag :radius, options_for_select([5, 10, 20, 30]) %>
+        </div>
+        <div>
+          <label for="advanced">Advanced search</label>
+          <%= check_box_tag :advanced %>
+        </div>
+      </div>
 
-  <label for="location">Location</label>
-  <%= text_field_tag :location %>
+      <div id="extra_search" style="display:none;">
+        <div>
+          <label for="remote">Work from home only</label>
+          <%= check_box_tag :remote %>
+        </div>
+        <div>
+          <label for="salaryMin">Salary min</label>
+          <%= select_tag :salaryMin, options_for_select(["none", "£10,000", "£20,000", "£30,000", "£40,000", "£50,000", "£60,000", "£70,000", "£80,000", "£90,000", "£100,000"]) %>
+        </div>
+        <div>
+          <label for="salaryMax">Salary max (optional)</label>
+          <%= select_tag :salaryMax, options_for_select(["none", "£20,000", "£30,000", "£40,000", "£50,000", "£60,000", "£70,000", "£80,000", "£90,000", "£110,000"]) %>
+        </div>
 
-  <label for="radius">Radius</label>
-  <%= select_tag :radius, options_for_select([5, 10, 20, 30]) %>
-
-  <label for="advanced">Advanced search</label>
-  <%= check_box_tag :advanced %>
-
-  <div id="extra_search" style="display:none;">
-    <label for="remote">Work from home only</label>
-    <%= check_box_tag :remote %>
-
-    <label for="salaryMin">Salary min</label>
-    <%= select_tag :salaryMin, options_for_select(["none", "£10,000", "£20,000", "£30,000", "£40,000", "£50,000", "£60,000", "£70,000", "£80,000", "£90,000", "£100,000"]) %>
-    <label for="salaryMax">Salary max (optional)</label>
-    <%= select_tag :salaryMax, options_for_select(["none", "£20,000", "£30,000", "£40,000", "£50,000", "£60,000", "£70,000", "£80,000", "£90,000", "£110,000"]) %>
-
-    <%#label for="secondJob">Additional job title (warning this increases search time)</label>
-    <%#= text_field_tag :secondJob %>
+        <%#label for="secondJob">Additional job title (warning this increases search time)</label>
+        <%#= text_field_tag :secondJob %>
+      </div>
+    </div>
+    <%= submit_tag "Search", id: "search_button"%>
   </div>
-
- <%= submit_tag "Search" %>
 <% end %>
 
