@@ -1,10 +1,9 @@
-<div id="<%= dom_id job %>">
-    <p><%= job.title %></p>
+<div id="<%= dom_id job %>" class="job-item">
+    <h4><%= job.title %></h4>
     <p><%= job.location %></p>
     <p><%= job.salary %></p>
     <p><%= job.link %></p>
-    <p><%= job.latitude %></p>
-    <p><%= job.longitude %></p>
+    <%= button_to "Remove this job", @job, method: :delete %>
 </div>
 
 

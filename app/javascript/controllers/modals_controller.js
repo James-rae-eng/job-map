@@ -7,7 +7,7 @@ export default class extends Controller {
 
   close(e) {
     // Prevent default action
-    // e.preventDefault();
+    e.preventDefault();
     // Remove from parent
     const modal = document.getElementById('modal');
     modal.innerHTML = '';

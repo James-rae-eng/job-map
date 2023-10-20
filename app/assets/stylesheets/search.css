@@ -1,0 +1,25 @@
+.search_form {
+    border-top: 4px double lightgray;
+    border-bottom: 4px double lightgray;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+ 
+  #simple_search {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+ 
+  #extra_search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+ 
+  #search_button {
+    font-size: large;
+  }

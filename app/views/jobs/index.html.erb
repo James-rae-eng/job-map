@@ -1,22 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Jobs</h1>
-
 <%= include_gon %>
+<div class="index">
+  <h2><%=@jobs.length%> Jobs Saved</h2>
 
-<% provide :head_tags do %>
-  <%= javascript_import_module_tag "map" %>
-<% end %>
-<div id="map" data: {@scrape.to_json}></div>
-
-<div id="jobs">
-  <% @jobs.each do |job| %>
-    <%= render job %>
-    <p>
-      <%= link_to "Show this job", job %>
-    </p>
+  <% provide :head_tags do %>
+    <%= javascript_import_module_tag "map" %>
   <% end %>
-</div>
+  <div id="map" data: {@scrape.to_json}></div>
 
-<%#= turbo_frame_tag "modal" %>
+  <div id="jobs">
+    <% @jobs.each do |job| %>
+      <%= render job %>
+    <% end %>
+  </div>
+</div>
 

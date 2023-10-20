@@ -1,0 +1,8 @@
+.job-item {
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 3px lightgray;
+  }

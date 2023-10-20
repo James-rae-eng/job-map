@@ -1,0 +1,15 @@
+#footer { 
+    min-height:50px; 
+    background:rgb(241, 241, 241); 
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  .personal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+ 

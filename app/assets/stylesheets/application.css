@@ -19,12 +19,9 @@
    min-height: 100vh;
    display: flex; 
    flex-direction: column;
+   padding: 0 20px;
  }
-
- #main {
-   flex: 1; 
- }
-
+ 
  a:link { text-decoration: none; }
  a:visited { text-decoration: none; }
  a:hover { 
@@ -32,18 +29,6 @@
    transform: scale(1.1);
 }
  a:active { text-decoration: none; }
-
- .topbar {
-   padding: 10px 10px;
-   margin-bottom: 10px;
-   display: flex;
-   justify-content: space-between;
- }
-
- #home {
-   font-size: x-large;
-   font-weight: bolder;
- }
 
  .home {
    display: flex;
@@ -60,101 +45,11 @@
    text-align: center;
  }
 
- .search_form {
-   background-color: #e7e7e7;
-   padding: 10px 0;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 30px;
+#main {
+   flex: 1; 
  }
 
- #simple_search {
-   display: flex;
-   align-items: center;
-   gap: 15px;
- }
-
- #extra_search {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
- }
-
- #search_button {
-   font-size: large;
- }
-
- #map {
-    width: 800px;
-    height: 600px;
-    margin: 20px 0;
- }
-
- .modal {
-   position: fixed;
-   z-index: 1;
-   padding: 1em;
-   min-width: 450px;
-   max-width: 600px;
-   
-   /* Positioning */
-   right: 10px;
-   top: 40%;
-   transform: translate(-2%, -50%);
-
-   overflow: auto;
-   background-color: rgba(0, 0, 0, 0.322);
-   background-color: rgb(255, 255, 255);
-   border-radius: 5px;
-   /* Add the drop shadow */
-   box-shadow: 0 0 10px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19);
-}
-
-.cancel-button {
-   background-color: #1530ff;
-   font-size: 12px;
-   color: white;
-   padding: 4px 8px;
-   border: none;
-   border-radius: 4px;
-   cursor: pointer;
-   float: right;
-   text-decoration: none;
-}
-
-.cancel-button:hover {
-   background-color: #2640fe;
-}
-
-.map-view-button {
-   background-color: #1530ff;
-   font-size: 12px;
-   color: white;
-   padding: 4px 8px;
-   border: none;
-   border-radius: 4px;
-   cursor: pointer;
-   float: left;
-   text-decoration: none;
-} 
-
- #footer { 
-   min-height:50px; 
-   background:rgb(241, 241, 241); 
-   display: flex;
-   flex-direction: column;
- }
-
- .personal {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
-   gap: 10px;
- }
-
- .icon {
+.icon {
 	width: 30px;
 	transition: transform .3s;
 }
