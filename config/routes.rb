@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       get :miniIndex
     end
     member do 
-    #collection do
       post :addJob
     end
   end

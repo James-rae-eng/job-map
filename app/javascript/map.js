@@ -4,10 +4,9 @@
 // import { jobs_path } from './routes';
 // import { addJob_jobs_path } from './routes';
 
+// send ajax request to server to save job to database
 function sendIndex(index) {
   const httpRequest = new XMLHttpRequest();
-  // httpRequest.open('POST', `${jobs_path}/${index}`);
-  // httpRequest.open('POST', addJob_jobs_path(index));
   httpRequest.open('POST', `http://localhost:3000/jobs/${index}/addJob`);
   httpRequest.send();
 }
@@ -55,6 +54,7 @@ function initMap() {
     });
   }
 
+  // Save job button
   google.maps.event.addListener(infowindow, 'domready', () => {
     google.maps.event.addDomListener(document.getElementById('saveBtn'), 'click', () => {
       const btn = document.getElementById('saveBtn');

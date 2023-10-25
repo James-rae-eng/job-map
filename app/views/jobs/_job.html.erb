@@ -3,7 +3,7 @@
     <p><%= job.location %></p>
     <p><%= job.salary %></p>
     <p><%= job.link %></p>
-    <%= button_to "Remove this job", @job, method: :delete %>
+    <%= button_to "Remove this job", job, method: :delete, data: {turbo: "false"} %>
 </div>
 
 
