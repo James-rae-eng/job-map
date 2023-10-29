@@ -30,6 +30,14 @@
 }
  a:active { text-decoration: none; }
 
+ p {
+  margin: 0;
+ }
+
+ h4 {
+  margin: 0;
+ }
+
  .home {
    display: flex;
    flex-direction: column;

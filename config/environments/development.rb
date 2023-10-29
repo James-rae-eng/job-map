@@ -71,4 +71,7 @@ Rails.application.configure do
   # Automatically update js-routes file
   # when routes.rb is changed
   config.middleware.use(JsRoutes::Middleware)
+
+  # Default mailer, needed for devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

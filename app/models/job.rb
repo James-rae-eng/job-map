@@ -1,4 +1,6 @@
 class Job < ApplicationRecord
+    belongs_to :user, optional: true
+
     require 'geocoder'
     require 'selenium-webdriver'
 

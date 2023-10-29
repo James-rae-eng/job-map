@@ -1,7 +1,10 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: %i[ show edit update destroy ]
+  #before_action :set_job, only: %i[ show edit update destroy ]
   # Disable CRF
   protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
+
+  before_action :authenticate_user!, except: [:scrape]
 
   def scrape 
     job = params[:job]
@@ -28,9 +31,9 @@ class JobsController < ApplicationController
 
   # GET /jobs or /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = current_user.jobs
 
-    # Convert saved jobs into same format as scrape
+    # Convert saved jobs into same format as scrape for map display purposes
     result = []
     list = @jobs.as_json
     list.each do |job|
@@ -44,21 +47,7 @@ class JobsController < ApplicationController
 
   # Small index in modal
   def miniIndex
-    @jobs = Job.all
-  end
-
-  # GET /jobs/1 or /jobs/1.json
-  def show
-  end
-
-  # GET /jobs/new
-  def new
-    #@job = Job.new(title, location, salary, link, lattitude, longitude)
-    ## redirect_to request.path
-  end
-
-  # GET /jobs/1/edit
-  def edit
+    @jobs = current_user.jobs
   end
 
   # Add job to saved list (triggered by js)
@@ -82,26 +71,15 @@ class JobsController < ApplicationController
   # POST /jobs or /jobs.json
   def create (title, location, salary, link, latitude, longitude)
     @job = Job.new(title: title, location: location, salary: salary, link: link, latitude: latitude, longitude: longitude)
-
+   
+    @job.user_id = current_user.id
+    
     respond_to do |format|
       if @job.save
         format.html { redirect_to job_url(@job), notice: "Job was successfully created." }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @job.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /jobs/1 or /jobs/1.json
-  def update
-    respond_to do |format|
-      if @job.update(job_params)
-        format.html { redirect_to job_url(@job), notice: "Job was successfully updated." }
-        format.json { render :show, status: :ok, location: @job }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
@@ -117,15 +95,19 @@ class JobsController < ApplicationController
     end
   end
 
+  def show
+    @job = Job.find(params[:id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_job
-      @job = Job.find(params[:id])
-    end
+    #def set_job
+    #  @job = Job.find(params[:id])
+    #end
 
     # Only allow a list of trusted parameters through.
-    def job_params
-      params.fetch(:job, {})
-      #params.require(:job).permit(:title, :location, :salary, :link)
-    end
+    #def job_params
+    #  params.fetch(:job, {})
+    #  params.require(:job).permit(:title, :location, :salary, :link)
+    #end
 end

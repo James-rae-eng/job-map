@@ -5,4 +5,7 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 3px 3px lightgray;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
