@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
 
-  before_action :authenticate_user!, except: [:scrape]
+  skip_before_action :authenticate_user!, only: [:scrape], :raise => false
 
   def scrape 
     job = params[:job]
@@ -87,6 +87,7 @@ class JobsController < ApplicationController
 
   # DELETE /jobs/1 or /jobs/1.json
   def destroy
+    @job = Job.find(params[:id])
     @job.destroy
 
     respond_to do |format|

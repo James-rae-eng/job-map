@@ -11,6 +11,14 @@ function sendIndex(index) {
   httpRequest.send();
 }
 
+// Check cookies to see if user is signed in, return true if they are, false otherwise
+function signedIn() {
+  if (document.cookie.indexOf('signed_in') > -1) {
+    return true;
+  }
+  return false;
+}
+
 function initMap() {
   // Get scrape variable containing all jobs
   const jobs = gon.scrape;
@@ -59,7 +67,11 @@ function initMap() {
     google.maps.event.addDomListener(document.getElementById('saveBtn'), 'click', () => {
       const btn = document.getElementById('saveBtn');
       const index = btn.value;
-      sendIndex(index);
+      if (signedIn() === true) {
+        sendIndex(index);
+      } else {
+        alert('Unable to save Job. You must be signed in to save.');
+      }
     });
   });
 }
