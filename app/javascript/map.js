@@ -19,6 +19,31 @@ function signedIn() {
   return false;
 }
 
+// Add job content to map infowindow
+function addContent(infowindow, jobs, i, map, marker) {
+  // Dont add save button if users is already on their saved page (denoted by users in url)
+  if (document.URL.includes('users')) {
+    infowindow.setContent(
+      `<p>${jobs[i].title}</p>`
+      + `<p>${jobs[i].location}</p>`
+      + `<p>${jobs[i].salary}</p>`
+      + `<a href=${jobs[i].link} target="_blank">${jobs[i].link}</a>`,
+    );
+    infowindow.open(map, marker);
+  } else {
+    infowindow.setContent(
+      `<p>${jobs[i].title}</p>`
+      + `<p>${jobs[i].location}</p>`
+      + `<p>${jobs[i].salary}</p>`
+      + `<a href=${jobs[i].link} target="_blank">${jobs[i].link}</a>`
+      + '<br><br>'
+      // eslint-disable-next-line no-template-curly-in-string
+      + `<button id="saveBtn" value=${i}>Save</button>`,
+    );
+    infowindow.open(map, marker);
+  }
+}
+
 function initMap() {
   // Get scrape variable containing all jobs
   const jobs = gon.scrape;
@@ -49,16 +74,7 @@ function initMap() {
 
     // Deal with infowindow content & event listener for each marker
     google.maps.event.addListener(marker, 'click', () => {
-      infowindow.setContent(
-        `<p>${jobs[i].title}</p>`
-      + `<p>${jobs[i].location}</p>`
-      + `<p>${jobs[i].salary}</p>`
-      + `<a href=${jobs[i].link} target="_blank">${jobs[i].link}</a>`
-      + '<br><br>'
-      // eslint-disable-next-line no-template-curly-in-string
-      + `<button id="saveBtn" value=${i}>Save</button>`,
-      );
-      infowindow.open(map, marker);
+      addContent(infowindow, jobs, i, map, marker);
     });
   }
 
@@ -68,7 +84,11 @@ function initMap() {
       const btn = document.getElementById('saveBtn');
       const index = btn.value;
       if (signedIn() === true) {
+        // Save to saved jobs list (database)
         sendIndex(index);
+        // Disable save button so job cant be saved again
+        btn.disabled = true;
+        btn.innerHTML = 'SAVED';
       } else {
         alert('Unable to save Job. You must be signed in to save.');
       }

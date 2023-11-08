@@ -5,6 +5,7 @@
     padding: 1em;
     min-width: 450px;
     max-width: 600px;
+    max-height: 70%;
     
     /* Positioning */
     right: 10px;
