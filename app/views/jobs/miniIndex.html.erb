@@ -5,10 +5,10 @@
               <%= render job %>
           <% end %>
       </div>
-      <%= link_to "Go to map view", user_jobs_path, class: "map-view-button", data: {turbo: "false"} %>
+      <%= link_to "Go to map view", user_jobs_path, class: "map-view-link", data: {turbo: "false"} %>
       <%= link_to "Cancel", "#", data: {
         controller: "modals",
         action: "modals#close"
-      }, class: "cancel-button" %>
+      }, class: "cancel-link" %>
   </div>
 <% end %>

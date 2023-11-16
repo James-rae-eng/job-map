@@ -14,48 +14,98 @@
  *= require_self
  */
 
- body {
-   margin: 0;
-   min-height: 100vh;
-   display: flex; 
-   flex-direction: column;
-   padding: 0 20px;
- }
- 
- a:link { text-decoration: none; }
- a:visited { text-decoration: none; }
- a:hover { 
-   text-decoration: none; 
-   transform: scale(1.1);
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex; 
+  flex-direction: column;
+  padding: 0 20px;
 }
- a:active { text-decoration: none; }
 
- p {
+a:link { 
+  text-decoration: none; 
+  color: #3d7df8f0;
+}
+a:hover { 
+  text-decoration: none; 
+  transform: scale(1.1);
+}
+a:active { text-decoration: none; }
+a:visited { 
+  color: inherit;
+}
+
+p {
   margin: 0;
- }
+}
 
- h4 {
+h4 {
   margin: 0;
- }
+}
 
- .home {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
- }
+#notice {
+  padding: 15px 0 15px 0;
+  font-size: larger;
+  color: green;
+}
 
- .about {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   text-align: center;
- }
+#notice:empty {
+  padding: 0;
+}
+
+#alert {
+  padding: 15px 0 15px 0;
+  font-size: larger;
+  font-weight: bold;
+  color: red;
+}
+
+#alert:empty {
+  padding: 0;
+}
+
+button {
+  color: white;
+  background-color: #3d7df8f0;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  scale: 1.05;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex: 1;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 40px;
+  flex: 1;
+}
+
+.disclaimer {
+  display: inline-block;
+  align-self: flex-end;
+  text-align: center;
+  margin: 40px 0 40px 0;
+}
 
 #main {
-   flex: 1; 
- }
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
 .icon {
 	width: 30px;

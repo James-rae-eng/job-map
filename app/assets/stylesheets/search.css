@@ -22,4 +22,11 @@
  
   #search_button {
     font-size: large;
+    font-weight: bold;
+    color: black;
+    background-color: #DBA507;
+    padding: 5px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }

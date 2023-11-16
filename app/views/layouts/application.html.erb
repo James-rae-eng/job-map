@@ -16,12 +16,13 @@
 
   <body>
     <%= render "shared/topbar" %>
-    
-    <p id="notice"><%= notice %></p>
-    <p id="alert"><%= alert %></p>
   
     <div id="main">
       <%= render "shared/search" %>
+
+      <p id="notice"><%= notice %></p>
+      <p id="alert"><%= alert %></p>
+
       <%= turbo_frame_tag "modal" %>
       <%= yield %>
     </div>

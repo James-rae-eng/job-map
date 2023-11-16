@@ -1,49 +1,45 @@
 
  .modal {
-    position: fixed;
-    z-index: 1;
-    padding: 1em;
-    min-width: 450px;
-    max-width: 600px;
-    max-height: 70%;
-    
-    /* Positioning */
-    right: 10px;
-    top: 40%;
-    transform: translate(-2%, -50%);
- 
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.322);
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
-    /* Add the drop shadow */
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19);
+  position: fixed;
+  z-index: 1;
+  padding: 1em;
+  min-width: 450px;
+  max-width: 600px;
+  max-height: 70%;
+  
+  /* Positioning */
+  right: 10px;
+  top: 40%;
+  transform: translate(-2%, -50%);
+
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.322);
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  /* Add the drop shadow */
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19);
  }
  
- .cancel-button {
-    background-color: #1530ff;
-    font-size: 12px;
-    color: white;
-    padding: 4px 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-    text-decoration: none;
+.cancel-link {
+  color: #3d7df8f0 !important;
+  border: 1px solid #3d7df8f0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  float: right;
+  text-decoration: none;
+  font-size: smaller;
+  font-weight: bold;
+  margin: 4px 10px 0 0;
  }
  
- .cancel-button:hover {
-    background-color: #2640fe;
- }
- 
- .map-view-button {
-    background-color: #1530ff;
-    font-size: 12px;
-    color: white;
-    padding: 4px 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: left;
-    text-decoration: none;
+.map-view-link {
+  color: #3d7df8f0 !important;
+  border: 1px solid #3d7df8f0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  float: left;
+  text-decoration: none;
+  font-size: large;
+  font-weight: bolder;
+  margin-left: 10px;
  } 

@@ -1,9 +1,12 @@
 <div id="<%= dom_id job %>" class="job-item">
-    <h4><%= job.title %></h4>
-    <p><%= job.location %></p>
-    <p><%= job.salary %></p>
-    <p><%= job.link %></p>
-    <%= button_to "Remove this job", job, method: :delete, data: {turbo: "false"} %>
+    <div class="job-desc">
+        <h4><%= job.title %></h4>
+        <p><%= job.location %></p>
+        <p><%= job.salary %></p>
+        <p><%= job.link %></p>
+    </div>
+    <%#= button_to "Delete", job, method: :delete, data: {turbo: "false"} %>
+    <%= button_to(image_tag('bin.png', id: "bin"), job, method: :delete, data: {turbo: "false"}, id: "delete" ) %>
 </div>
 
 

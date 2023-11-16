@@ -24,7 +24,7 @@ function addContent(infowindow, jobs, i, map, marker) {
   // Dont add save button if users is already on their saved page (denoted by users in url)
   if (document.URL.includes('users')) {
     infowindow.setContent(
-      `<p>${jobs[i].title}</p>`
+      `<p><b>${jobs[i].title}</b></p>`
       + `<p>${jobs[i].location}</p>`
       + `<p>${jobs[i].salary}</p>`
       + `<a href=${jobs[i].link} target="_blank">${jobs[i].link}</a>`,
@@ -32,7 +32,7 @@ function addContent(infowindow, jobs, i, map, marker) {
     infowindow.open(map, marker);
   } else {
     infowindow.setContent(
-      `<p>${jobs[i].title}</p>`
+      `<p><b>${jobs[i].title}</b></p>`
       + `<p>${jobs[i].location}</p>`
       + `<p>${jobs[i].salary}</p>`
       + `<a href=${jobs[i].link} target="_blank">${jobs[i].link}</a>`

@@ -6,6 +6,20 @@
     border-radius: 10px;
     box-shadow: 0 3px 3px lightgray;
     display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .job-desc {
+    display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+  }
+
+  #delete {
+    background-color: white;
+  }
+
+  #bin {
+    width: 25px;
   }

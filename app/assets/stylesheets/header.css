@@ -3,14 +3,26 @@
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .sign-links {
     display: flex;
-    gap: 15px;
+    gap: 20px;
+    color: #3d7df8f0;
   }
  
   #home {
-    font-size: x-large;
+    font-size: xx-large;
     font-weight: bolder;
+    display: flex;
+    color: #3d7df8f0;
+  }
+
+  #home:hover {
+    transform: scale(1);
+  }
+
+  #compass {
+    width: 45px;
   }
