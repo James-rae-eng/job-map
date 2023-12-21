@@ -101,3 +101,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "pg", "~> 1.5"
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
