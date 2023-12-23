@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_141646) do
     t.datetime "updated_at", null: false
     t.decimal "latitude"
     t.decimal "longitude"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
