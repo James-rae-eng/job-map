@@ -76,5 +76,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Config for railway deploy
-  config.host<<"job-map-production.up.railway.app"
+  config.hosts<<"job-map-production.up.railway.app"
+
 end

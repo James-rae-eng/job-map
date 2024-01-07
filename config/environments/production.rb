@@ -92,5 +92,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Config for railway deploy
-  config.host<<"job-map-production.up.railway.app"
+  config.hosts<<"job-map-production.up.railway.app"
 end
