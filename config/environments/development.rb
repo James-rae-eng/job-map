@@ -74,4 +74,7 @@ Rails.application.configure do
 
   # Default mailer, needed for devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Config for railway deploy
+  config.host<<"job-map-production.up.railway.app"
 end

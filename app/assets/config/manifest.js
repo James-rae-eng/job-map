@@ -4,3 +4,5 @@
 //= link_tree ../../../vendor/javascript .js
 
 //= link routes.js
+
+//= link_directory ../javascripts .js
