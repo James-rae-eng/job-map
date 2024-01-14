@@ -14,7 +14,7 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1"
-    #RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
@@ -56,8 +56,8 @@ COPY --link . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-# substituted DUMMY for 1 inbelow line, then replaced the 1 with the master.key just to test
-RUN SECRET_KEY_BASE=9577d946b67ffb4d5998c83a1c1ecb4d ./bin/rails assets:precompile
+# substituted DUMMY for RAILS_MASTER_KEY inbelow line
+RUN SECRET_KEY_BASE=RAILS_MASTER_KEY ./bin/rails assets:precompile
 
 
 # Final stage for app image
