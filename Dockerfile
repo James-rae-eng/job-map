@@ -8,13 +8,9 @@ FROM ruby:$RUBY_VERSION-slim as base
 WORKDIR /rails
 
 # Set production environment
-# added below line to fix secre_key_base=dummy issue
-ARG RAILS_MASTER_KEY=$(config/master.key) 
-
 ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1"
-    RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
