@@ -9,12 +9,12 @@ WORKDIR /rails
 
 # Set production environment
 # added below line to fix secre_key_base=dummy issue
-#RAILS_MASTER_KEY=$(cat config/master.key) 
+ARG RAILS_MASTER_KEY=$(config/master.key) 
 
 ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1"
-    RAILS_MASTER_KEY= "9577d946b67ffb4d5998c83a1c1ecb4d"
+    RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
