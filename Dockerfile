@@ -14,7 +14,7 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1"
-    #RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    RAILS_MASTER_KEY= "9577d946b67ffb4d5998c83a1c1ecb4d"
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
