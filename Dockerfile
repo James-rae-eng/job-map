@@ -8,9 +8,13 @@ FROM ruby:$RUBY_VERSION-slim as base
 WORKDIR /rails
 
 # Set production environment
+# added below line to fix secre_key_base=dummy issue
+#RAILS_MASTER_KEY=$(cat config/master.key) 
+
 ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1"
+    #RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
@@ -52,7 +56,8 @@ COPY --link . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
+# substituted DUMMY for 1 inbelow line
+RUN SECRET_KEY_BASE=1 ./bin/rails assets:precompile
 
 
 # Final stage for app image
