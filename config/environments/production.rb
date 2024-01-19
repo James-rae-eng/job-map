@@ -91,6 +91,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Config for railway deploy
-  config.hosts<<"job-map-production.up.railway.app"
+  # Railway domain info
+  config.hosts << ENV['DEVELOPMENT_HOSTS']
 end

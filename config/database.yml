@@ -1,31 +1,19 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
+# PostgreSQL. Versions 9.3 and up are supported.
 #
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem "sqlite3"
+# Install the pg driver:
+#   gem install pg
+# On macOS with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On macOS with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
 #
-#default: &default
-#  adapter: sqlite3
-#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#  timeout: 5000
-
-#development:
-#  <<: *default
-#  database: db/development.sqlite3
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-#test:
-#  <<: *default
-#  database: db/test.sqlite3
-
-#production:
-#  <<: *default
-#  database: db/production.sqlite3
-
-
-#Above replaced with the below for move to postgresql
+# Configure Using Gemfile
+# gem "pg"
+#
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -35,31 +23,16 @@ default: &default
 
 development:
   <<: *default
-  database: job-map_development
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: job-map_test
-
-production:
-  <<: *default
-  url: <%= ENV["DATABASE_URL"]%> 
-  database: job-map_production
-  username: job-map
-  password: <%= ENV["JOB-MAP_DATABASE_PASSWORD"] %>
-  timeout: 5000
-
-
-##########################################
+  host: <%= ENV["JOB_MAP_DATABASE_HOST"] %>
+  database: <%= ENV["JOB_MAP_DATABASE_NAME"] %>
+  username: <%= ENV["JOB_MAP_DATABASE_USERNAME"] %>
+  password: <%= ENV["JOB_MAP_DATABASE_PASSWORD"] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: myapp
+  #username: jobmap
 
   # The password associated with the postgres role (username).
   #password:
@@ -85,7 +58,9 @@ production:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-
+test:
+  <<: *default
+  database: job_map_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -107,5 +82,11 @@ production:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-
-
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+  host: <%= ENV["PGHOST"] %>
+  database: <%= ENV["PGDATABASE"] %>
+  username: <%= ENV["PGUSER"] %>
+  password: <%= ENV["PGPASSWORD"] %>
+  port: <%= ENV["PGPORT"] %>
