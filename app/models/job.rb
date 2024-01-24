@@ -47,7 +47,7 @@ class Job < ApplicationRecord
         jobs = Array.new
  
         # Specifying chrome path (only needed in production, comment out for local development)
-        #Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
+        Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
 
         # configuring Chrome to run in headless mode 
         options = Selenium::WebDriver::Chrome::Options.new
@@ -61,7 +61,7 @@ class Job < ApplicationRecord
         options.add_argument("--disable-xss-auditor")
         options.add_option("excludeSwitches", ["enable-automation", "load-extension"])
         options.add_argument("--headless")
-        # Add locationof binary for production
+        # Add location of binary for production
         options.binary = "/usr/bin/google-chrome"
         
         # initializing the Selenium Web Driver for Chrome 
