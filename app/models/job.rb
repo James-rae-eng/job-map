@@ -47,7 +47,7 @@ class Job < ApplicationRecord
         jobs = Array.new
  
         # Specifying chrome path (only needed in production, comment out for local development)
-        #Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
+        Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
 
         # configuring Chrome to run in headless mode 
         options = Selenium::WebDriver::Chrome::Options.new
