@@ -47,6 +47,9 @@ gem 'nokogiri'
 gem 'httparty'
 gem 'selenium-webdriver'
 
+# To install a local chromedriver for selenium to use in production
+gem 'webdrivers', '~> 5.0', require: false
+
 # Allow rails routes to be used in js files
 gem 'js-routes'
 
@@ -95,7 +98,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   #gem "selenium-webdriver"
-  gem "webdrivers"
+  #gem "webdrivers"
 end
 
 gem "devise", "~> 4.9"

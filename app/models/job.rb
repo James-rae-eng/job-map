@@ -3,6 +3,8 @@ class Job < ApplicationRecord
 
     require 'geocoder'
     require 'selenium-webdriver'
+    # webdriver needed for selenium to run on production server (without local copy of chrome)
+    #require 'webdrivers/chromedriver'
 
     $scrapedJobs = nil
 
@@ -44,6 +46,9 @@ class Job < ApplicationRecord
         # container to hold jobs:
         jobs = Array.new
  
+        # Specifying chrome path (only needed in production, comment out for local development)
+        Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
+
         # configuring Chrome to run in headless mode 
         options = Selenium::WebDriver::Chrome::Options.new
 
