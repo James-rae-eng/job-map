@@ -45,4 +45,4 @@ In the backend Jobs are scraped from Totaljobs, as this currently has highest nu
 
 Jobmap is packaged and distributed using the MIT License which allows for commercial use, distribution, modification and private use provided that all copies of the software contain the same license and copyright.
 
-A project by James Rae
+A project by James Rae.
